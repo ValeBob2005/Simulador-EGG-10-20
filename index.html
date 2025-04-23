@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador EGG 10-20</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --color-primary:  #4a90e2;
+      --color-accent:   #2a3d66;
+      --color-bg:       #f0f4f8;
+      --color-panel:    #ffffff;
+      --color-text:     #333333;
+      --shadow:         0 4px 12px rgba(0,0,0,0.1);
+      --radius:         8px;
+      --font:           'Poppins', sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:      var(--font);
+      background:       var(--color-bg);
+      color:            var(--color-text);
+      display:          flex;
+      flex-direction:   column;
+      height:           100vh;
+    }
+    header {
+      background:       linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color:            #fff;
+      padding:          1rem;
+      text-align:       center;
+      box-shadow:       var(--shadow);
+    }
+    header h1 { font-weight:700; font-size:1.8rem; }
+    header p  { font-weight:300; margin-top:0.5rem; }
+
+    .main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+      overflow: hidden;
+    }
+
+    /* Canvas container */
+    #canvas-container {
+      width: 60vw;
+      height: 60vh;
+      margin: 2rem auto;
+      background: #000;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .sidebar {
+      background: var(--color-panel);
+      margin: 1rem;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .sidebar h2 { color: var(--color-accent); margin-bottom:0.75rem; }
+    .sidebar p  { margin-bottom:1rem; line-height:1.5; }
+    .sidebar ul {
+      list-style: none;
+      margin-left: 0.5rem;
+    }
+    .sidebar ul li {
+      margin-bottom:    0.75rem;
+      padding-left:     1.5rem;
+      position:         relative;
+      transition:       color .2s;
+    }
+    .sidebar ul li:hover { color: var(--color-primary); }
+    .sidebar ul li::before {
+      content:          "\f111";
+      font-family:      "Font Awesome 5 Free";
+      font-weight:      900;
+      position:         absolute;
+      left:             0;
+      top:              2px;
+      font-size:        0.6rem;
+      color:            var(--color-primary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.75rem;
+      background: var(--color-panel);
+      border-top: 1px solid #ddd;
+      box-shadow: var(--shadow);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body { font-size: 0.9rem; }
+      .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+      }
+      #canvas-container {
+        width: 90vw;
+        height: 50vh;
+        margin: 0.5rem;
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+      .sidebar {
+        height: 50vh;
+        margin: 0.5rem;
+        border-radius: 0 0 var(--radius) var(--radius);
+        padding: 1rem;
+      }
+      header h1 { font-size:1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Simulador EGG 10-20</h1>
+    <p>Aprende interactivamente las ubicaciones</p>
+  </header>
+
+  <div class="main">
+    <div id="canvas-container"></div>
+
+    <aside class="sidebar">
+      <h2>Referencias 10-20</h2>
+      <p>Estos son los principales puntos:</p>
+      <ul>
+        <li>Nasion (entre las cejas)</li>
+        <li>Vertex (cima de la cabeza)</li>
+        <li>Inion (occipital)</li>
+        <li>Orejas (izq. / der.)</li>
+      </ul>
+      <!-- Controles eliminados -->
+    </aside>
+  </div>
+
+  <footer>
+    © 2025 • Capacitación EGG • Three.js
+  </footer>
+
+  <!-- Three.js y complementos -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
